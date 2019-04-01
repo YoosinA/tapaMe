@@ -1,3 +1,24 @@
 body{
   background: #ded7c9;
 }
+
+#navb{
+      float: left;
+      background-color: black;
+      border-width: 2px;
+      max-width: 40%;
+      height: 100%;
+      margin-left: -32%;
+      transition: 0.8s;
+      position: fixed; /* Stay in place */
+      /* z-index: 1; */
+  }
+
+  #sidebar.active {
+      margin-left: 0%;
+  }
+
+  #myCanvas {
+    position: absolute;
+    /* z-index: -1; */
+  }

@@ -1,6 +1,11 @@
 // import * as ani from 'animation';
 
 $(document).ready(function () {
+
+  $('#sidebarCollapse').on('click', function () {
+    $('#navb').toggleClass('active');
+  });
+
   function dragover_handler(ev) {
     ev.preventDefault();
     // Set the dropEffect to move
