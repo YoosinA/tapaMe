@@ -14,20 +14,11 @@ body{
       /* z-index: 1; */
   }
 
-  #navb.active {
+  #sidebar.active {
       margin-left: 0%;
-  }
-
-  #sidebarCollapse.active {
-    margin-left: 32%;
-  }
-
-  #sidebarCollapse{
-    transition: 0.8s;
   }
 
   #myCanvas {
     position: absolute;
-    z-index: -1;
     /* z-index: -1; */
   }
