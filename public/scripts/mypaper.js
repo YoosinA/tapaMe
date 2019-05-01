@@ -1,25 +1,25 @@
 // import * as ani from 'animation';
 
+// separate this to sidebar controller file, will have side bar view file
+
+$('#sidebarCollapse').on('click', function () {
+  $('#navb').toggleClass('active');
+  $('#sidebarCollapse').toggleClass('active');
+});
+
+// put this
 $(document).ready(function () {
-
-  $('#sidebarCollapse').on('click', function () {
-    $('#navb').toggleClass('active');
-  });
-
   function dragover_handler(ev) {
     ev.preventDefault();
     // Set the dropEffect to move
     ev.dataTransfer.dropEffect = "move"
 }
-
   function drop_handler(ev) {
     ev.preventDefault();
     // Get the id of the target and add the moved element to the target's DOM
     var data = ev.dataTransfer.getData("text/plain");
     ev.target.appendChild(document.getElementById(data));
   }
-
-
 });
 
 // var cirController = new ExpandCircle("images/mid.png");
@@ -52,8 +52,11 @@ rat.position = [x, y];
   // console.log(JSON.stringify(group));
 
   //path.clipMask = true
-
+  // group.on('circleDone',function(event) {
+  //   this.remove();
+  // });
   group.onFrame = function(event) {
+
     if (this.opacity <= 0){
       paper.view.detach('frame', this.onFrame);
       this.remove();
@@ -71,15 +74,18 @@ rat.position = [x, y];
   circle.onFrame = function(event){
     // var offset = Math.sin(event.count / 30) * 10;
     // this.position.x = this.position.x + offset;
-    if (this.area <= 4000){
+    if (this.area <= 6000){
       this.scale(1.03);
 
     // } else if (this.opacity <= 0){
     //   paper.view.detach('frame', this.onFrame);
     //   this.remove();
     } else {
-      paper.view.detach('frame', this.onFrame);
-      this.remove();
+      // this.dispatchEvent( new CustomEvent ( 'circleDone', {
+      //   bubbles: true
+      // }));
+      //paper.view.detach('frame', this.onFrame);
+      //this.remove();
     }
 
   };
