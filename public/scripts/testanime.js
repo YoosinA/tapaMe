@@ -1,21 +1,6 @@
-//import '../styles/index.css';
 import anime from "../lib/anime.es.js";
 
-
-
-// anime({
-// targets: 'div',
-// translateX: 250,
-// rotate: '1turn',
-// backgroundColor: '#FFF',
-// duration: 8000
-// });
-
-
-
-
 ///////////////////////////////////////////////////////
-window.human = false;
 
 var c = document.getElementById("c");
 var ctx = c.getContext('2d');
@@ -23,14 +8,10 @@ var ctx = c.getContext('2d');
 function setCanvasSize() {
   c.width = window.innerWidth;
   c.height = window.innerHeight;
-  // c.style.width = window.innerWidth + 'px';
-  // c.style.height = window.innerHeight + 'px';
-  // c.getContext('2d').scale(2, 2);
 }
 setCanvasSize();
  window.addEventListener('resize', setCanvasSize, false);
 
-//var ctx = c.getContext("2d");
 var cH = c.height;
 var cW = c.width;
 
@@ -38,7 +19,6 @@ var cW = c.width;
 var numberOfParticules = 30;
 var pointerX = 0;
 var pointerY = 0;
-var tap = ('ontouchstart' in window || navigator.msMaxTouchPoints) ? 'touchstart' : 'mousedown';
 var colors = ['#FF1461', '#18FF92', '#5A87FF', '#FBF38C'];
 
 
@@ -48,11 +28,6 @@ var animations = [];
 var circles = [];
 
 //////////////////////////////////////
-
-
-//para.style.postion = "absolute";
-       // Insert text
-
 
 var img = new Image();
 
@@ -66,20 +41,18 @@ imgdraw();
 
 //////////////////////////////////////
 
-// ctx.globalCompositeOperation='destination-over';
-
 function imgdraw(){
     ctx.drawImage(img,
-  c.width / 2 - 500 / 2,
-       c.height / 2 - 500/ 2,
+  cW / 2 - 500 / 2,
+       cH / 2 - 500/ 2,
        500, 500);
 }
 
 
 
 function updateCoords(e) {
-  pointerX = anime.random(0, c.width);
-  pointerY = anime.random(0, c.height);
+  pointerX = anime.random(0, cW);
+  pointerY = anime.random(0, cH);
 }
 
 function setParticuleDirection(p) {
@@ -101,7 +74,7 @@ function createParticule(x,y) {
   p.endPos = setParticuleDirection(p);
   p.draw = function() {
     ctx.beginPath();
-    //ctx.globalCompositeOperation='destination-over';
+
     ctx.arc(p.x, p.y, p.radius, 0, 2 * Math.PI, true);
     ctx.fillStyle = p.color;
     ctx.fill();
@@ -135,61 +108,46 @@ function renderParticule(anim) {
   }
 }
 
-function animateParticules(x, y) {
-  var circle = createCircle(x, y);
-  var particules = [];
-  for (var i = 0; i < numberOfParticules; i++) {
-    particules.push(createParticule(x, y));
-  }
-  anime.timeline().add({
-    targets: particules,
-    x: function(p) { return p.endPos.x; },
-    y: function(p) { return p.endPos.y; },
-    radius: 0.1,
-    duration: anime.random(1200, 1800),
-    easing: 'easeOutExpo',
-    update: renderParticule
-  })
-    .add({
-    targets: circle,
-    radius: anime.random(80, 160),
-    lineWidth: 0,
-    alpha: {
-      value: 0,
-      easing: 'linear',
-      duration: anime.random(600, 800),
-    },
-    duration: anime.random(1200, 1800),
-    easing: 'easeOutExpo',
-    update: renderParticule,
-    offset: 0
-  });
-}
-
-var render = anime({
-  duration: Infinity,
-  update: function() {
-  ctx.clearRect(0, 0, c.width, c.height);
-  //ctx.globalCompositeOperation = "source-over";
-  imgdraw();
-  }
-});
-
+// function animateParticules(x, y) {
+//   var circle = createCircle(x, y);
+//   var particules = [];
+//   for (var i = 0; i < numberOfParticules; i++) {
+//     particules.push(createParticule(x, y));
+//   }
+//   anime.timeline().add({
+//     targets: particules,
+//     x: function(p) { return p.endPos.x; },
+//     y: function(p) { return p.endPos.y; },
+//     radius: 0.1,
+//     duration: anime.random(1200, 1800),
+//     easing: 'easeOutExpo',
+//     update: renderParticule
+//   })
+//     .add({
+//     targets: circle,
+//     radius: anime.random(80, 160),
+//     lineWidth: 0,
+//     alpha: {
+//       value: 0,
+//       easing: 'linear',
+//       duration: anime.random(600, 800),
+//     },
+//     duration: anime.random(1200, 1800),
+//     easing: 'easeOutExpo',
+//     update: renderParticule,
+//     offset: 0
+//   });
+// }
+//
+// var render = anime({
+//   duration: Infinity,
+//   update: function() {
+//   ctx.clearRect(0, 0, cW, cH);
+//   imgdraw();
+//   }
+// });
 
 
-var centerX = window.innerWidth / 2;
-var centerY = window.innerHeight / 2;
-
-// function autoClick() {
-//   if (window.human) return;
-//   animateParticules(
-//     anime.random(centerX-50, centerX+50),
-//     anime.random(centerY-50, centerY+50)
-//   );
-  // anime({duration: 200}).finished.then(autoClick);
-//}
-
-//autoClick();
 
 
 /////////////////////////////////////////////// up firewor/////////////////
@@ -223,17 +181,47 @@ function calcPageFillRadius(x, y) {
   return Math.sqrt(Math.pow(l, 2) + Math.pow(h, 2));
 }
 
-// function addClickListeners() {
-//   document.addEventListener("touchstart", handleEvent);
-//   document.addEventListener("mousedown", handleEvent);
-// };
+function animateParticules(x, y) {
+  var circle = createCircle(x, y);
+  var particules = [];
+  for (var i = 0; i < numberOfParticules; i++) {
+    particules.push(createParticule(x, y));
+  }
+  var paranimation = anime({
+    targets: particules,
+    x: function(p) { return p.endPos.x; },
+    y: function(p) { return p.endPos.y; },
+    radius: 0.1,
+    duration: anime.random(1200, 1800),
+    easing: 'easeOutExpo',
+    update: renderParticule,
+    complete: removeAnimation
+  });
+
+  var cirlanimation = anime({
+    targets: circle,
+    radius: anime.random(80, 160),
+    lineWidth: 0,
+    alpha: {
+      value: 0,
+      easing: 'linear',
+      duration: anime.random(600, 800),
+    },
+    duration: anime.random(1200, 1800),
+    easing: 'easeOutExpo',
+    update: renderParticule,
+    offset: 0,
+    complete: removeAnimation
+  });
+
+
+  animations.push(cirlanimation, paranimation);
+  anime.timeline().add(paranimation);
+  anime.timeline().add(cirlanimation);
+
+}
 
 function handleEvent() {
-    // if (e.touches) {
-    //   e.preventDefault();
-    //   e = e.touches[0];
-    // }
-
 
     var currentColor = colorPicker.current();
     var nextColor = colorPicker.next();
@@ -327,7 +315,6 @@ Circle.prototype.draw = function() {
     ctx.stroke();
   }
   if (this.fill) {
-    //ctx.globalCompositeOperation='destination-over';
     ctx.fillStyle = this.fill;
     ctx.fill();
     imgdraw();
@@ -338,9 +325,7 @@ Circle.prototype.draw = function() {
 
 var animate = anime({
   duration: Infinity,
-  //zIndex: -1000,
   update: function() {
-    //ctx.globalCompositeOperation='destination-over';
     ctx.fillStyle = bgColor;
 
     ctx.fillRect(0, 0, cW, cH);
@@ -353,38 +338,15 @@ var animate = anime({
   }
 });
 
-// var resizeCanvas = function() {
-//   cW = window.innerWidth;
-//   cH = window.innerHeight;
-//   //c.width = cW * devicePixelRatio;
-//   //c.height = cH * devicePixelRatio;
-//   //ctx.scale(devicePixelRatio, devicePixelRatio);
-// };
-
-(function init() {
-  //resizeCanvas();
-  if (window.CP) {
-    // CodePen's loop detection was causin' problems
-    // and I have no idea why, so...
-    window.CP.PenTimer.MAX_TIME_IN_LOOP_WO_EXIT = 6000;
-  }
-  //window.addEventListener("resize", resizeCanvas);
-  // addClickListeners();
-  // if (!!window.location.pathname.match(/fullcpgrid/)) {
-  //   startFauxClicking();
-  // }
-  //handleInactiveUser();
-})();
 
 document.addEventListener("keypress", function(e) {
 
     updateCoords(e);
-    //console.log(e.which);
   if (e.which > 104) {
     handleEvent();
   } else {
     window.human = true;
-    render.play();
+    //render.play();
 
     animateParticules(pointerX, pointerY);
 
@@ -394,32 +356,3 @@ document.addEventListener("keypress", function(e) {
 
 
 }, false);
-
-// function handleInactiveUser() {
-//   var inactive = setTimeout(function(){
-//     fauxClick(cW/2, cH/2);
-//   }, 2000);
-
-//   function clearInactiveTimeout() {
-//     clearTimeout(inactive);
-//     document.removeEventListener("mousedown", clearInactiveTimeout);
-//     document.removeEventListener("touchstart", clearInactiveTimeout);
-//   }
-//
-//   document.addEventListener("mousedown", clearInactiveTimeout);
-//   document.addEventListener("touchstart", clearInactiveTimeout);
-// }
-
-// function startFauxClicking() {
-//   setTimeout(function(){
-//     fauxClick(anime.random( cW * .2, cW * .8), anime.random(cH * .2, cH * .8));
-//     startFauxClicking();
-//   }, anime.random(200, 900));
-// }
-
-// function fauxClick(x, y) {
-//   var fauxClick = new Event("mousedown");
-//   fauxClick.pageX = x;
-//   fauxClick.pageY = y;
-//   document.dispatchEvent(fauxClick);
-// }
