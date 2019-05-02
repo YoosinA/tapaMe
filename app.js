@@ -2,6 +2,7 @@ var express = require("express");
 var app = express();
 var bodyPaser = require("body-parser");
 var path = require("path");
+var anime = require("animejs");
 
 app.use(bodyPaser.urlencoded({extended: true}));
 //app.set("view engine", "ejs");
