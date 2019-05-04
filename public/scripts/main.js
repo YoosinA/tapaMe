@@ -18,7 +18,7 @@ document.addEventListener("keypress", function(e) {
     updateCoords(e);
     //console.log(e.which);
   if (e.which > 104) {
-    handleEvent();
+    ripple();
   } else {
     window.human = true;
     render.play();

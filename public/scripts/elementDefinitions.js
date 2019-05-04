@@ -60,3 +60,43 @@ function createCircle(x,y) {
   }
   return p;
 }
+
+/////////// ripple /////////////
+
+function createripple() {
+    var currentColor = colorPicker.current();
+    var nextColor = colorPicker.next();
+    var targetR = calcPageFillRadius(pointerX, pointerY);
+    var rippleSize = Math.min(200, (cW * .4));
+    var minCoverDuration = 750;
+
+    var pageFill = new Circle({
+      x: pointerX,
+      y: pointerY,
+      r: 0,
+      fill: nextColor
+    });
+
+    var ripple = new Circle({
+      x: pointerX,
+      y: pointerY,
+      r: 0,
+      fill: currentColor,
+      stroke: {
+        width: 3,
+        color: currentColor
+      },
+      opacity: 1
+    });
+
+    var particles = [];
+    for (var i=0; i<32; i++) {
+      var particle = new Circle({
+        x: pointerX,
+        y: pointerY,
+        fill: currentColor,
+        r: anime.random(24, 48)
+      })
+      particles.push(particle);
+    }
+}

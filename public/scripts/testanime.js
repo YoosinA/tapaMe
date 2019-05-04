@@ -1,5 +1,26 @@
 import anime from "../lib/anime.es.js";
 
+function spin() { anime({
+translateX: 250,
+targets: 'div',
+rotate: '1turn',
+backgroundColor: '#FFF',
+duration: 8000
+});
+}	// duration: 8000
+
+// <svg height="100" width="100">
+//   <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" />
+// </svg>
+//var d = document.getElementById("test");
+var svgns = "http://www.w3.org/2000/svg";
+var s = document.createElementNS(svgns, 'svg');
+s.setAttribute('width', 500);
+s.setAttribute('height', 500);
+
+document.body.appendChild(s);
+
+
 ///////////////////////////////////////////////////////
 
 var c = document.getElementById("c");
@@ -55,31 +76,43 @@ function updateCoords(e) {
   pointerY = anime.random(0, cH);
 }
 
-function setParticuleDirection(p) {
+function setParticuleDirection(x,y) {
   var angle = anime.random(0, 360) * Math.PI / 180;
   var value = anime.random(50, 180);
   var radius = [-1, 1][anime.random(0, 1)] * value;
   return {
-    x: p.x + radius * Math.cos(angle),
-    y: p.y + radius * Math.sin(angle)
+    x: x + radius * Math.cos(angle),
+    y: y + radius * Math.sin(angle)
   }
 }
 
-function createParticule(x,y) {
-  var p = {};
-  p.x = x;
-  p.y = y;
-  p.color = colors[anime.random(0, colors.length - 1)];
-  p.radius = anime.random(16, 32);
-  p.endPos = setParticuleDirection(p);
-  p.draw = function() {
-    ctx.beginPath();
+function removesvg(k){
+  console.log('complete');
 
-    ctx.arc(p.x, p.y, p.radius, 0, 2 * Math.PI, true);
-    ctx.fillStyle = p.color;
-    ctx.fill();
-  }
-  return p;
+  console.log(k);
+  k.animatables[0].target.remove();
+  //s.removeChild(k);
+}
+
+function createParticule(x,y) {
+  var cir = document.createElementNS(svgns, 'circle');
+  cir.setAttribute('cx', 100);
+        cir.setAttribute('cy', 100);
+        cir.setAttribute('r', anime.random(16, 32));
+        cir.setAttribute('fill', colors[anime.random(0, colors.length - 1)]);
+  s.appendChild(cir);
+
+    var xx = setParticuleDirection(x, y);
+    //console.log(xx);
+  var animatecir = anime({
+    targets: cir,
+    translateX: [100, xx.x],
+    translateY: [100, xx.y],
+
+    easing: 'easeOutExpo',
+    duration: 1200,
+    complete: removesvg
+  });
 }
 
 function createCircle(x,y) {
@@ -184,19 +217,35 @@ function calcPageFillRadius(x, y) {
 function animateParticules(x, y) {
   var circle = createCircle(x, y);
   var particules = [];
+
+  // var path = anime.path('path');
+  //   var svgforpath = document.createElement('svg');
+  // var pathh = document.createElement('path');
+  // pathh.setAttribute('d','M150,0 L150,100 200,300 Z');
+  // svgforpath.appendChild(pathh);
+  // document.body.appendChild(svgforpath);
+
   for (var i = 0; i < numberOfParticules; i++) {
-    particules.push(createParticule(x, y));
+    var p = createParticule(x, y);
+    // particules.push(p);
+
+    // var panimation = anime({
+    //   targets: p,
+    //   x:  p.endPos.x,
+    //   y:  p.endPos.y,
+    //   translateX: 200,
+    //   translateY: 200,
+    //   backgroundColor: '#FFF',
+    //   duration: 8000,
+    //   //radius: 0.1,
+    //   //duration: anime.random(1200, 1800),
+    //   easing: 'easeOutExpo',
+    //   //update: renderParticule,
+    //   //complete: removeAnimation
+    // });
+
   }
-  var paranimation = anime({
-    targets: particules,
-    x: function(p) { return p.endPos.x; },
-    y: function(p) { return p.endPos.y; },
-    radius: 0.1,
-    duration: anime.random(1200, 1800),
-    easing: 'easeOutExpo',
-    update: renderParticule,
-    complete: removeAnimation
-  });
+
 
   var cirlanimation = anime({
     targets: circle,
@@ -209,15 +258,16 @@ function animateParticules(x, y) {
     },
     duration: anime.random(1200, 1800),
     easing: 'easeOutExpo',
-    update: renderParticule,
+    //update: renderParticule,
     offset: 0,
     complete: removeAnimation
   });
 
 
-  animations.push(cirlanimation, paranimation);
-  anime.timeline().add(paranimation);
-  anime.timeline().add(cirlanimation);
+  // //animations.push(cirlanimation, paranimation);
+  // animations.push(cirlanimation);
+  // //anime.timeline().add(paranimation);
+  // anime.timeline().add(cirlanimation);
 
 }
 

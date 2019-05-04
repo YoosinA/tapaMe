@@ -36,10 +36,36 @@ function setParticuleDirection(p) {
     y: p.y + radius * Math.sin(angle)
   }
 }
+
+var colorPicker = (function() {
+  var colors = ["#FF6138", "#FFBE53", "#2980B9", "#282741"];
+  var index = 0;
+  function next() {
+    index = index++ < colors.length-1 ? index : 0;
+    return colors[index];
+  }
+  function current() {
+    return colors[index]
+  }
+  return {
+    next: next,
+    current: current
+  }
+})();
+
+
+function removeAnimation(animation) {
+  var index = animations.indexOf(animation);
+  if (index > -1) animations.splice(index, 1);
+}
+
+function calcPageFillRadius(x, y) {
+  var l = Math.max(x - 0, cW - x);
+  var h = Math.max(y - 0, cH - y);
+  return Math.sqrt(Math.pow(l, 2) + Math.pow(h, 2));
+}
+
 ////////////// firework ////////////////
-
-
-
 
 
 
@@ -86,64 +112,14 @@ function animateParticules(x, y) {
   animations.push(cirlanimation, paranimation);
   anime.timeline().add(paranimation);
   anime.timeline().add(cirlanimation);
-
 }
 
 
 ///////////////////// background change ////////////////////
 
 
-var colorPicker = (function() {
-  var colors = ["#FF6138", "#FFBE53", "#2980B9", "#282741"];
-  var index = 0;
-  function next() {
-    index = index++ < colors.length-1 ? index : 0;
-    return colors[index];
-  }
-  function current() {
-    return colors[index]
-  }
-  return {
-    next: next,
-    current: current
-  }
-})();
+function ripple() {
 
-function removeAnimation(animation) {
-  var index = animations.indexOf(animation);
-  if (index > -1) animations.splice(index, 1);
-}
-
-function calcPageFillRadius(x, y) {
-  var l = Math.max(x - 0, cW - x);
-  var h = Math.max(y - 0, cH - y);
-  return Math.sqrt(Math.pow(l, 2) + Math.pow(h, 2));
-}
-
-// function addClickListeners() {
-//   document.addEventListener("touchstart", handleEvent);
-//   document.addEventListener("mousedown", handleEvent);
-// };
-
-function handleEvent() {
-    // if (e.touches) {
-    //   e.preventDefault();
-    //   e = e.touches[0];
-    // }
-
-
-    var currentColor = colorPicker.current();
-    var nextColor = colorPicker.next();
-    var targetR = calcPageFillRadius(pointerX, pointerY);
-    var rippleSize = Math.min(200, (cW * .4));
-    var minCoverDuration = 750;
-
-    var pageFill = new Circle({
-      x: pointerX,
-      y: pointerY,
-      r: 0,
-      fill: nextColor
-    });
     var fillAnimation = anime({
       targets: pageFill,
       r: targetR,
@@ -155,17 +131,7 @@ function handleEvent() {
       }
     });
 
-    var ripple = new Circle({
-      x: pointerX,
-      y: pointerY,
-      r: 0,
-      fill: currentColor,
-      stroke: {
-        width: 3,
-        color: currentColor
-      },
-      opacity: 1
-    });
+
     var rippleAnimation = anime({
       targets: ripple,
       r: rippleSize,
@@ -175,16 +141,7 @@ function handleEvent() {
       complete: removeAnimation
     });
 
-    var particles = [];
-    for (var i=0; i<32; i++) {
-      var particle = new Circle({
-        x: pointerX,
-        y: pointerY,
-        fill: currentColor,
-        r: anime.random(24, 48)
-      })
-      particles.push(particle);
-    }
+
     var particlesAnimation = anime({
       targets: particles,
       x: function(particle){
@@ -224,7 +181,6 @@ Circle.prototype.draw = function() {
     ctx.stroke();
   }
   if (this.fill) {
-    //ctx.globalCompositeOperation='destination-over';
     ctx.fillStyle = this.fill;
     ctx.fill();
     imgdraw();
@@ -235,9 +191,7 @@ Circle.prototype.draw = function() {
 
 var animate = anime({
   duration: Infinity,
-  //zIndex: -1000,
   update: function() {
-    //ctx.globalCompositeOperation='destination-over';
     ctx.fillStyle = bgColor;
 
     ctx.fillRect(0, 0, cW, cH);
