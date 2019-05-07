@@ -8,7 +8,6 @@ var s = document.getElementById('svgSpace');
 var svgns = "http://www.w3.org/2000/svg";
 
 function updateCoords() {
-  console.log(s.width);
   return {
     x : anime.random(20, 80),
     y: anime.random(10, 90)

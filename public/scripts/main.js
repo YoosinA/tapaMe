@@ -9,9 +9,16 @@ function setSVGSize() {
   s.setAttribute('height', window.innerHeight);
 }
 
+function toggleSidebar(){
+  document.getElementById('toggleSidebar').classList.toggle('active');
+  document.getElementById('sidebar').classList.toggle('active');
+
+}
+
 ///////////// Init ///////////////////////////
 setSVGSize();
 window.addEventListener('resize', setSVGSize, false);
 document.addEventListener("keypress", ctrl.onKeyPress, false);
+document.getElementById('toggleSidebar').addEventListener('click', toggleSidebar, false);
 
 ctrl.changeAniBinding(eles.animateParticules, 'a');
