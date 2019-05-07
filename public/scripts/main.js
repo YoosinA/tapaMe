@@ -1,30 +1,17 @@
-import control from "./controller.js"
+// global properties and other stuff
+import * as eles from "./elementDefs.js"
+import * as ctrl from "./controller.js"
 
-var c = document.getElementById("c");
-var ctx = c.getContext('2d');
-
-function setCanvasSize() {
-  c.width = window.innerWidth;
-  c.height = window.innerHeight;
+var s = document.getElementById('svgSpace');
+/////////////// functions ////////////////////////
+function setSVGSize() {
+  s.setAttribute('width', window.innerWidth);
+  s.setAttribute('height', window.innerHeight);
 }
 
-//pass ctx and canvas h/w
+///////////// Init ///////////////////////////
+setSVGSize();
+window.addEventListener('resize', setSVGSize, false);
+document.addEventListener("keypress", ctrl.onKeyPress, false);
 
-setCanvasSize();
-window.addEventListener('resize', setCanvasSize, false);
-
-document.addEventListener("keypress", function(e) {
-
-    updateCoords(e);
-    //console.log(e.which);
-  if (e.which > 104) {
-    ripple();
-  } else {
-    window.human = true;
-    render.play();
-
-    animateParticules(pointerX, pointerY);
-
-  }
-
-}, false);
+ctrl.changeAniBinding(eles.animateParticules, 'a');

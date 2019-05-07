@@ -18,9 +18,10 @@ body{
       margin-left: 0%;
   }
 
-  #myCanvas {
-    position: absolute;
-    /* z-index: -1; */
+  #svgSpace {
+    writable: true;
+    width: 100vw;
+  height: 100vh;
   }
 
   canvas {

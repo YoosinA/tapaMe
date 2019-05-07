@@ -1,13 +1,13 @@
 import anime from "../lib/anime.es.js";
 
-function spin() { anime({
-translateX: 250,
-targets: 'div',
-rotate: '1turn',
-backgroundColor: '#FFF',
-duration: 8000
-});
-}	// duration: 8000
+// function spin() { anime({
+// translateX: 250,
+// targets: 'div',
+// rotate: '1turn',
+// backgroundColor: '#FFF',
+// duration: 8000
+// });
+// }	// duration: 8000
 
 // <svg height="100" width="100">
 //   <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" />
@@ -15,8 +15,8 @@ duration: 8000
 //var d = document.getElementById("test");
 var svgns = "http://www.w3.org/2000/svg";
 var s = document.createElementNS(svgns, 'svg');
-s.setAttribute('width', 500);
-s.setAttribute('height', 500);
+s.setAttribute('width', window.innerWidth);
+s.setAttribute('height', window.innerHeight);
 
 document.body.appendChild(s);
 
@@ -74,9 +74,11 @@ var circles = [];
 
 
 
-function updateCoords(e) {
-  pointerX = anime.random(0, cW);
-  pointerY = anime.random(0, cH);
+function updateCoords() {
+  return {
+    x : anime.random(0, cW),
+    y: anime.random(0, cH)
+  }
 }
 
 function setParticuleDirection(x,y) {
@@ -107,7 +109,7 @@ function createParticule(x,y) {
 
     var xx = setParticuleDirection(x, y);
     //console.log(xx);
-  var animatecir = anime({
+  anime({
     targets: cir,
     translateX: [100, xx.x],
     translateY: [100, xx.y],
@@ -394,17 +396,23 @@ function createParticule(x,y) {
 
 function animateParticules(x, y) {
   //var circle = createCircle(x, y);
-  var particules = [];
+  // var particules = [];
 
-  // var path = anime.path('path');
-  //   var svgforpath = document.createElement('svg');
-  // var pathh = document.createElement('path');
-  // pathh.setAttribute('d','M150,0 L150,100 200,300 Z');
-  // svgforpath.appendChild(pathh);
-  // document.body.appendChild(svgforpath);
-
+  var coords = updateCoords();
   for (var i = 0; i < numberOfParticules; i++) {
-    var p = createParticule(x, y);
+    var p = createParticule(coords.x, coords.y);
+  }
+
+  // updateCoords();
+  // // var path = anime.path('path');
+  // //   var svgforpath = document.createElement('svg');
+  // // var pathh = document.createElement('path');
+  // // pathh.setAttribute('d','M150,0 L150,100 200,300 Z');
+  // // svgforpath.appendChild(pathh);
+  // // document.body.appendChild(svgforpath);
+  //
+  // for (var i = 0; i < numberOfParticules; i++) {
+  //   var p = createParticule(x, y);
     // particules.push(p);
 
     // var panimation = anime({
@@ -421,20 +429,19 @@ function animateParticules(x, y) {
     //   //update: renderParticule,
     //   //complete: removeAnimation
     // });
-
-  }
 }
 
 document.addEventListener("keypress", function(e) {
 
-    updateCoords(e);
+
+    console.log(e.which);
   if (e.which > 104) {
     //handleEvent();
   } else {
     window.human = true;
     //render.play();
 
-    animateParticules(pointerX, pointerY);
+    animateParticules();
 
   }
 
