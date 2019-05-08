@@ -40,9 +40,18 @@ body{
 
 #svgSpace {
   position: absolute;
+  height: 100%;
+  width: 100%;
 }
 
 .bottom-nav{
   position: absolute;
     bottom: 0;
+}
+
+#playground{
+  overflow: hidden;
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
 }

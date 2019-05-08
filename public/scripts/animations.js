@@ -8,8 +8,11 @@ import anime from "../lib/anime.es.js";
 
 // remove SVG shapes after animation completes
 function removeSvgShape(k){
+  //console.log(k);
   k.animatables[0].target.remove();
 }
+
+
 
 // set random directions
 function setParticuleDirection(x,y) {
@@ -23,12 +26,13 @@ function setParticuleDirection(x,y) {
 }
 
 // radiacally moving a list of targets from one center point to all directions
-function radical(target){
+function radical(target, x, y){
     var xx = setParticuleDirection(target.x, target.y);
-    anime({
+      console.log(target.x + "   " + target.y);
+    var a = anime({
       targets: target,
-      translateX: [100, xx.x],
-      translateY: [100, xx.y],
+      translateX: [target.x , xx.x],
+      translateY: [target.y , xx.y],
       easing: 'easeOutExpo',
       duration: 1200,
       complete: removeSvgShape

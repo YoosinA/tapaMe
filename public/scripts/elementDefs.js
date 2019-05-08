@@ -23,19 +23,53 @@ function createCircle(x, y){
         cir.x = x;
         cir.y = y;
         // cir.setAttribute('r', anime.random(16, 32));
-        cir.setAttribute('r', anime.random(3.2, 6.7));
+        cir.setAttribute('r', anime.random(6.7, 19));
         cir.setAttribute('fill', colors[anime.random(0, colors.length - 1)]);
   s.appendChild(cir);
   return cir;
 }
 
-function animateParticules() {
+
+var playground = document.getElementById('playground');
+
+function createimg(img, x, y){
+  var image = document.createElement('img');
+  image.src = img;
+  image.style.top = y + 'px';
+  image.style.left = x + 'px';
+  image.style.position = 'absolute';
+  image.setAttribute('x', x);
+  image.setAttribute('y', y);
+  // image.x = x;
+  // image.y = y;
+  playground.appendChild(image);
+  return image;
+
+}
+
+function animateParticules(img) {
   var coords = updateCoords();
   var numberOfParticules = 30;
+
+      // var u = document.createElement('use');
+
+       // <use clip-path="url(#myClip)" xlink:href="#heart" fill="red" />
+
+
   for (var i = 0; i < numberOfParticules; i++) {
-    var p = createCircle(coords.x, coords.y);
+    if (img == 0){
+        var p = createCircle(coords.x, coords.y);
+    } else {
+      var x = coords.x / 100 * playground.offsetWidth /2.5;
+      var y = coords.y / 100 * playground.offsetHeight /3;
+      var p = createimg(img, x, y);
+
+      console.log(coords.x / 100 )
+    }
     anis.radical(p);
   }
+      // u.clipPath = s;
+      // u.href = image;
 }
 
 export { animateParticules };

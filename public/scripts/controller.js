@@ -6,7 +6,9 @@
 
 
 var animations = new Array(26);
+var imgs = new Array(26);
 animations.fill(0);
+imgs.fill(0);
 
 /////////////// functions ////////////////////////
 function setSVGSize() {
@@ -15,15 +17,22 @@ function setSVGSize() {
 }
 
 function onKeyPress(e) {
-  var key = e.which - 'a';
+  var key = e.which - 'a'.charCodeAt();
   if (animations[key] != 0) {
-    animations[key]();
-  }
+      animations[key](imgs[key]);
+    }
 }
 
-function changeAniBinding(ani, key){
-  key = key - 'a';
+function changeAniBinding(key, ani){
+  key = key - 'a'.charCodeAt();
   animations[key] = ani;
+  // update ani's color/image/index
+}
+
+function changeImgBinding(key, img){
+  key = key - 'a'.charCodeAt();
+  imgs[key] = img;
+
   // update ani's color/image/index
 }
 
@@ -47,4 +56,4 @@ function onColorChange(){
   // update current animation
 }
 
-export { onKeyPress, setSVGSize, changeAniBinding };
+export { onKeyPress, setSVGSize, changeAniBinding, changeImgBinding };
