@@ -28,7 +28,6 @@ function setParticuleDirection(x,y) {
 // radiacally moving a list of targets from one center point to all directions
 function radical(target, x, y){
     var xx = setParticuleDirection(target.x, target.y);
-      console.log(target.x + "   " + target.y);
     var a = anime({
       targets: target,
       translateX: [target.x , xx.x],

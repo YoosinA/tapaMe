@@ -63,8 +63,6 @@ function animateParticules(img) {
       var x = coords.x / 100 * playground.offsetWidth /2.5;
       var y = coords.y / 100 * playground.offsetHeight /3;
       var p = createimg(img, x, y);
-
-      console.log(coords.x / 100 )
     }
     anis.radical(p);
   }
@@ -72,7 +70,20 @@ function animateParticules(img) {
       // u.href = image;
 }
 
-export { animateParticules };
+function createEle(name) {
+  switch(name) {
+  case "firework":
+    return animateParticules;
+    break;
+  // case y:
+  //   // code block
+  //   break;
+  default:
+    // code block
+}
+}
+
+export { createEle };
 
 
 

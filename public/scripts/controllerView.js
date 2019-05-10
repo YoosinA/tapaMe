@@ -1,5 +1,56 @@
 // update the view of the controller
 
+var s = document.getElementById('sidebar');
+const aniNames = ["firework", "circle"];
+
+function adddropdown(parent){
+  aniNames.forEach(function(a) {
+    var o = document.createElement('option');
+    o.value = a;
+    o.text = a;
+    parent.appendChild(o);
+})
+// giving the select a random default value
+parent.value = aniNames[Math.floor(Math.random()*aniNames.length)];
+}
+
+
+function addNewCtrlView(k, anis){
+  var ctrl = document.createElement('form');
+  ctrl.action = "";
+  ctrl.classList.add('ctrl');
+  var key = document.createElement('label');
+  key.innerHTML =  k + ':  ';
+  ctrl.appendChild(key);
+  var ani = document.createElement('select');
+  adddropdown(ani);
+  ctrl.appendChild(ani);
+   var filechoose = document.createElement('input');
+   filechoose.type = 'file';
+   filechoose.name = 'Choose Image';
+   ctrl.appendChild(filechoose);
+  s.appendChild(ctrl);
+  return {ctrl, ani, filechoose};
+}
+
+//imgthumbnail
+
+export {addNewCtrlView};
+
+// <form action="" method="get" class="form-example">
+//   <div class="form-example">
+//     <label for="name">Enter your name: </label>
+//     <input type="text" name="name" id="name" required>
+//   </div>
+//   <div class="form-example">
+//     <label for="email">Enter your email: </label>
+//     <input type="email" name="email" id="email" required>
+//   </div>
+//   <div class="form-example">
+//     <input type="submit" value="Subscribe!">
+//   </div>
+// </form>
+
 
 
 
