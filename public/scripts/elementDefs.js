@@ -54,8 +54,6 @@ function animateParticules(img) {
       // var u = document.createElement('use');
 
        // <use clip-path="url(#myClip)" xlink:href="#heart" fill="red" />
-
-
   for (var i = 0; i < numberOfParticules; i++) {
     if (img == 0){
         var p = createCircle(coords.x, coords.y);
@@ -66,15 +64,53 @@ function animateParticules(img) {
     }
     anis.radical(p);
   }
-      // u.clipPath = s;
-      // u.href = image;
 }
 
+
+function drawCircle(color){
+  color = 'black'
+  const cirWidth = 50;
+  var cir = document.getElementById('drawCircle');
+
+
+  console.log(cir);
+  if (!cir){
+      cir = document.createElementNS(svgns, 'path');
+      cir.setAttribute("stroke-width", cirWidth);
+      cir.id = 'drawCircle';
+      s.appendChild(cir);
+  }
+  // center circle
+  var cirx = playground.offsetWidth/2;
+  var ciry = playground.offsetHeight/2;
+  console.log(s);
+  console.log(ciry);
+  cir.setAttribute('d', 'M '+ cirx + ',' + ciry +
+  ' m -175, 0 a 175,175 0 1,0 350,0  a 175,175 0 1,0 -350,0');
+  anis.lineDrawing(cir, color);
+}
+
+
+
+function drawLines(){
+
+}
+
+function drawWave(){
+
+}
+
+function drawCross(){
+
+}
 function createEle(name) {
   switch(name) {
   case "firework":
     return animateParticules;
     break;
+  case "circle":
+  return drawCircle;
+  break;
   // case y:
   //   // code block
   //   break;

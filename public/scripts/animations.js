@@ -38,7 +38,25 @@ function radical(target, x, y){
     });
   }
 
-  export {radical};
+  function lineDrawing(path, color) {
+    anime({
+  targets: path,
+  strokeDashoffset: [anime.setDashoffset, 0],
+  easing: 'easeInOutCubic',
+  duration: 1500,
+  begin: function(anim) {
+    anim.animatables[0].target.setAttribute("stroke", color);
+  },
+  complete: function(anim) {
+    // setTimeout(function() {
+    //   anim.animatables[0].target.setAttribute("stroke", "");
+    // }, 500);
+    anim.animatables[0].target.setAttribute("stroke", "");
+  }
+});
+}
+
+  export {radical, lineDrawing};
 
 
 
