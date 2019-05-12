@@ -20,11 +20,13 @@ var chars = new Array(26);
 function onKeyPress(e) {
   var key = e.which - 'A'.charCodeAt();
   var c = ctrls[key];
-  if ( c != 0) {
-      c.ani(c.col);
-      // console.log(c.ani);
-      // c.ani.restart;
+  if ( c != 0 ) {
+    if (c.eles){
+      c.eles.restart();
+    } else {
+      c.eles = c.ani(c.col);
     }
+  }
 }
 
 function initChars(){
@@ -105,6 +107,7 @@ function Ctrl(k, ctrl) {
   this.img = 0,
   this.ani = 0,
   this.col = 0,
+  this.eles = 0,
   this.init = function(ani, filechoose, color){
 
     this.ctrl.addEventListener('drop', (e) => {

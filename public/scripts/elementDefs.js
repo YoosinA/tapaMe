@@ -64,9 +64,8 @@ function animateParticules(img) {
     }
     anis.radical(p);
   }
+  return 0;
 }
-
-var a = 0;
 
 function drawCircle(color){
   //color = 'black';
@@ -91,12 +90,7 @@ function drawCircle(color){
   ' m -175, 0 a 175,175 0 1,0 350,0  a 175,175 0 1,0 -350,0');
   s.removeChild(cir);
   s.appendChild(cir);
-  if (a == 0){
-      a = anis.tracePath(cir, color, -135);
-  } else {
-    a.restart();
-  }
-  
+  return anis.tracePath(cir, color, -135)
 
 }
 
