@@ -47,7 +47,7 @@ function createimg(img, x, y){
 
 }
 
-function animateParticules(img) {
+function animateParticules(color, img) {
   var coords = updateCoords();
   var numberOfParticules = 30;
 
@@ -67,7 +67,7 @@ function animateParticules(img) {
   return 0;
 }
 
-function drawCircle(color){
+function drawCircle(color, img){
   //color = 'black';
   const cirWidth = 50;
   var cir = document.getElementById('drawCircle');

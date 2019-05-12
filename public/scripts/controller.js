@@ -22,9 +22,14 @@ function onKeyPress(e) {
   var c = ctrls[key];
   if ( c != 0 ) {
     if (!c.eles){
-      c.eles = c.ani(c.col);
+      c.eles = c.ani(c.col, c.img);
     }
-    c.eles.restart();
+    // logic is a bit weird here, some ani don't have ele and is not silent,
+    // some ani creates ani and is silent
+    if (c.eles){
+          c.eles.restart();
+    }
+
   }
 }
 
