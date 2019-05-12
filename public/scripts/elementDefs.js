@@ -8,7 +8,6 @@ var s = document.getElementById('svgSpace');
 var svgns = "http://www.w3.org/2000/svg";
 
 function updateCoords() {
-  console.log(s.width);
   return {
     x : anime.random(20, 80),
     y: anime.random(10, 90)
@@ -24,22 +23,107 @@ function createCircle(x, y){
         cir.x = x;
         cir.y = y;
         // cir.setAttribute('r', anime.random(16, 32));
-        cir.setAttribute('r', anime.random(3.2, 6.7));
+        cir.setAttribute('r', anime.random(6.7, 19));
         cir.setAttribute('fill', colors[anime.random(0, colors.length - 1)]);
   s.appendChild(cir);
   return cir;
 }
 
-function animateParticules() {
-  var coords = updateCoords();
-  var numberOfParticules = 30;
-  for (var i = 0; i < numberOfParticules; i++) {
-    var p = createCircle(coords.x, coords.y);
-    anis.radical(p);
-  }
+
+var playground = document.getElementById('playground');
+
+function createimg(img, x, y){
+  var image = document.createElement('img');
+  image.src = img;
+  image.style.top = y + 'px';
+  image.style.left = x + 'px';
+  image.style.position = 'absolute';
+  image.setAttribute('x', x);
+  image.setAttribute('y', y);
+  // image.x = x;
+  // image.y = y;
+  playground.appendChild(image);
+  return image;
+
 }
 
-export { animateParticules };
+function animateParticules(img) {
+  var coords = updateCoords();
+  var numberOfParticules = 30;
+
+      // var u = document.createElement('use');
+
+       // <use clip-path="url(#myClip)" xlink:href="#heart" fill="red" />
+  for (var i = 0; i < numberOfParticules; i++) {
+    if (img == 0){
+        var p = createCircle(coords.x, coords.y);
+    } else {
+      var x = coords.x / 100 * playground.offsetWidth /2.5;
+      var y = coords.y / 100 * playground.offsetHeight /3;
+      var p = createimg(img, x, y);
+    }
+    anis.radical(p);
+  }
+  return 0;
+}
+
+function drawCircle(color){
+  //color = 'black';
+  const cirWidth = 50;
+  var cir = document.getElementById('drawCircle');
+
+
+  console.log(cir);
+  if (!cir){
+      cir = document.createElementNS(svgns, 'path');
+      cir.setAttribute("stroke-width", cirWidth);
+      cir.setAttribute("transform-origin", "center");
+      cir.id = 'drawCircle';
+      s.appendChild(cir);
+  }
+  // center circle
+  var cirx = playground.offsetWidth/2;
+  var ciry = playground.offsetHeight/2;
+  console.log(s);
+  console.log(ciry);
+  cir.setAttribute('d', 'M '+ cirx + ',' + ciry +
+  ' m -175, 0 a 175,175 0 1,0 350,0  a 175,175 0 1,0 -350,0');
+  s.removeChild(cir);
+  s.appendChild(cir);
+  return anis.tracePath(cir, color, -135)
+
+}
+
+
+
+function drawLines(){
+
+}
+
+function drawWave(){
+
+}
+
+function drawCross(){
+
+}
+function createEle(name) {
+  switch(name) {
+  case "firework":
+    return animateParticules;
+    break;
+  case "circle":
+  return drawCircle;
+  break;
+  // case y:
+  //   // code block
+  //   break;
+  default:
+    // code block
+}
+}
+
+export { createEle };
 
 
 

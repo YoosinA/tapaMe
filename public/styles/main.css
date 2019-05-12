@@ -2,31 +2,60 @@ body{
   background: #ded7c9;
 }
 
-#navb{
-      float: left;
-      background-color: black;
-      border-width: 2px;
-      max-width: 40%;
-      height: 100%;
-      margin-left: -32%;
-      transition: 0.8s;
-      position: fixed; /* Stay in place */
-      /* z-index: 1; */
-  }
+#sidebar {
+    float: left;
+    background-color: black;
+    color: white;
+    width: 32%;
+    height: 100%;
+    margin-left: -32%;
+    transition: 0.8s;
+    position: fixed; /* Stay in place */
+    /* z-index: 1; */
+}
 
-  #sidebar.active {
-      margin-left: 0%;
-  }
+#sidebar.active {
+    margin-left: 0%;
+}
 
-  #svgSpace {
-    writable: true;
-    width: 100vw;
+#toggleSidebar{
+  background-color: black;
+  color: white;
+  transition: 0.8s;
+  border-radius: 0% 50% 50% 0%;
+  border-color: #a9afb0;
+  bottom: 50%;
+  position: fixed;
+  border: none;
+
+}
+
+#toggleSidebar.hide{
+  margin-left: -28%;
+}
+
+#toggleSidebar.active{
+  margin-left: 32%;
+}
+
+#svgSpace {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+.bottom-nav{
+  position: absolute;
+    bottom: 0;
+}
+
+#playground{
+  overflow: hidden;
+  position: absolute;
   height: 100vh;
-  }
-
-  canvas {
-  display: block;
   width: 100vw;
-  height: 100vh;
-  cursor: none;
+}
+
+#drawCircle{
+  fill: none;
 }

@@ -8,8 +8,11 @@ import anime from "../lib/anime.es.js";
 
 // remove SVG shapes after animation completes
 function removeSvgShape(k){
+  //console.log(k);
   k.animatables[0].target.remove();
 }
+
+
 
 // set random directions
 function setParticuleDirection(x,y) {
@@ -23,19 +26,42 @@ function setParticuleDirection(x,y) {
 }
 
 // radiacally moving a list of targets from one center point to all directions
-function radical(target){
+function radical(target, x, y){
     var xx = setParticuleDirection(target.x, target.y);
-    anime({
+    var a = anime({
       targets: target,
-      translateX: [100, xx.x],
-      translateY: [100, xx.y],
+      translateX: [target.x , xx.x],
+      translateY: [target.y , xx.y],
       easing: 'easeOutExpo',
       duration: 1200,
       complete: removeSvgShape
     });
   }
 
-  export {radical};
+
+  function tracePath(path, color, rotate) {
+    var a = anime({
+  targets: path,
+  strokeDashoffset: [anime.setDashoffset, 0],
+  easing: 'easeOutBack',
+  rotate: rotate,
+ // easing: 'easeOutElastic',
+  duration: 1500,
+  autoplay: false,
+  begin: function(anim) {
+    anim.animatables[0].target.setAttribute("stroke", color);
+  },
+//rotate: 180,
+  complete: function(anim) {
+    setTimeout(function() {
+      anim.animatables[0].target.setAttribute("stroke", "");
+    }, 500);
+  }
+});
+return a;
+}
+
+  export {radical, tracePath};
 
 
 
@@ -244,4 +270,36 @@ function radical(target){
 //       });
 //     });
 //   }
+// });
+
+
+// anime({
+//   targets: 'path',
+//   strokeDashoffset: function(el) {
+//     var pathLength = el.getTotalLength();
+//     el.setAttribute('stroke-dasharray', pathLength);
+//     return [-pathLength, 0];
+//   },
+//   stroke: {
+//     value: function(el, i) {
+//       return 'rgb(200,'+ i * 8 +',150)';
+//     },
+//     easing: 'linear',
+//     duration: 2000,
+//   },
+//   strokeWidth: {
+//     value: 6,
+//     easing: 'linear',
+//     delay: function(el, i) {
+//       return 1200 + (i * 40);
+//     },
+//     duration: 800,
+//   },
+//   delay: function(el, i) {
+//     return i * 60;
+//   },
+//   duration: 1200,
+//   easing: 'easeOutExpo',
+//   loop: true,
+//   direction: 'alternate'
 // });
