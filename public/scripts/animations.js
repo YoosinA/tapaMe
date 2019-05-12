@@ -47,6 +47,7 @@ function radical(target, x, y){
   rotate: rotate,
  // easing: 'easeOutElastic',
   duration: 1500,
+  autoplay: false,
   begin: function(anim) {
     anim.animatables[0].target.setAttribute("stroke", color);
   },

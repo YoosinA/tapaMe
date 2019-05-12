@@ -21,11 +21,10 @@ function onKeyPress(e) {
   var key = e.which - 'A'.charCodeAt();
   var c = ctrls[key];
   if ( c != 0 ) {
-    if (c.eles){
-      c.eles.restart();
-    } else {
+    if (!c.eles){
       c.eles = c.ani(c.col);
     }
+    c.eles.restart();
   }
 }
 
@@ -106,7 +105,7 @@ function Ctrl(k, ctrl) {
   this.ctrl = ctrl.ctrl,
   this.img = 0,
   this.ani = 0,
-  this.col = 0,
+  this.col = 'black',
   this.eles = 0,
   this.init = function(ani, filechoose, color){
 
@@ -126,6 +125,9 @@ function Ctrl(k, ctrl) {
 
     color.addEventListener('change',(e) => {
       this.col = e.target.value;
+      if (this.eles){
+        this.eles = 0;
+      }
     }
   , false);
   }
