@@ -21,7 +21,9 @@ function onKeyPress(e) {
   var key = e.which - 'a'.charCodeAt();
   var c = ctrls[key];
   if ( c != 0) {
-      c.ani(c.img);
+      c.ani(c.col);
+      // console.log(c.ani);
+      // c.ani.restart;
     }
 }
 
@@ -102,7 +104,8 @@ function Ctrl(k, ctrl) {
   this.ctrl = ctrl.ctrl,
   this.img = 0,
   this.ani = 0,
-  this.init = function(ani, filechoose){
+  this.col = 0,
+  this.init = function(ani, filechoose, color){
 
     this.ctrl.addEventListener('drop', (e) => {
       onDocumentDrop(e, event.dataTransfer, this);
@@ -117,6 +120,11 @@ function Ctrl(k, ctrl) {
     filechoose.addEventListener('change', (e) => {
       onDocumentDrop(e, e.target, this);
     }, false);
+
+    color.addEventListener('change',(e) => {
+      this.col = e.target.value;
+    }
+  , false);
   }
 }
 
@@ -125,7 +133,7 @@ function addNewCtrl(){
   var k = chars.pop();
   var ctrl = ctrlView.addNewCtrlView(String.fromCharCode(65+k));
   var newCtrl = new Ctrl(k, ctrl);
-  newCtrl.init(ctrl.ani, ctrl.filechoose);
+  newCtrl.init(ctrl.ani, ctrl.filechoose, ctrl.color);
   ctrls[k] = newCtrl;
 }
 

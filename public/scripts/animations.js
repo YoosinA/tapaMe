@@ -39,7 +39,7 @@ function radical(target, x, y){
   }
 
   function lineDrawing(path, color) {
-    anime({
+    var a = anime({
   targets: path,
   strokeDashoffset: [anime.setDashoffset, 0],
   easing: 'easeInOutCubic',
@@ -54,6 +54,7 @@ function radical(target, x, y){
     anim.animatables[0].target.setAttribute("stroke", "");
   }
 });
+return a;
 }
 
   export {radical, lineDrawing};

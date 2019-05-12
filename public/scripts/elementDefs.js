@@ -66,9 +66,10 @@ function animateParticules(img) {
   }
 }
 
+var a = 0;
 
 function drawCircle(color){
-  color = 'black'
+  //color = 'black';
   const cirWidth = 50;
   var cir = document.getElementById('drawCircle');
 
@@ -87,7 +88,14 @@ function drawCircle(color){
   console.log(ciry);
   cir.setAttribute('d', 'M '+ cirx + ',' + ciry +
   ' m -175, 0 a 175,175 0 1,0 350,0  a 175,175 0 1,0 -350,0');
-  anis.lineDrawing(cir, color);
+  s.removeChild(cir);
+  s.appendChild(cir);
+  if (a == 0){
+      a = anis.lineDrawing(cir, color);
+  } else {
+    a.restart();
+  }
+
 }
 
 

@@ -30,7 +30,11 @@ function addNewCtrlView(k, anis){
    filechoose.name = 'Choose Image';
    ctrl.appendChild(filechoose);
   s.appendChild(ctrl);
-  return {ctrl, ani, filechoose};
+     var color = document.createElement('input');
+        color.type = 'color';
+           ctrl.appendChild(color);
+             s.appendChild(ctrl);
+  return {ctrl, ani, filechoose, color};
 }
 
 //imgthumbnail

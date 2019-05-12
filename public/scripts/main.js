@@ -8,7 +8,13 @@ var playground = document.getElementById('playground');
 
 function toggleSidebar(){
   document.getElementById('toggleSidebar').classList.toggle('active');
-  document.getElementById('sidebar').classList.toggle('active');
+  sidebar.classList.toggle('active');
+
+}
+
+function hideSidebar(){
+  document.getElementById('toggleSidebar').classList.remove('active');
+  sidebar.classList.remove('active');
 
 }
 
@@ -26,6 +32,7 @@ function onDocumentDrop_noDrop(event) {
 ///////////// Init ///////////////////////////
 document.addEventListener("keypress", ctrl.onKeyPress, false);
 document.getElementById('toggleSidebar').addEventListener('click', toggleSidebar, false);
+s.addEventListener('click', hideSidebar, false);
 document.addEventListener('dragover', onDocumentDrag_noDrop, false);
 document.addEventListener('drop', onDocumentDrop_noDrop, false);
 
