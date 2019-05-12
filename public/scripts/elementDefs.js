@@ -2,6 +2,7 @@
 
 import * as anis from './animations.js'
 import anime from "../lib/anime.es.js";
+import * as randColor from "./randcolor.js"
 // import element from './element.js'
 
 var s = document.getElementById('svgSpace');
@@ -14,7 +15,9 @@ function updateCoords() {
   }
 }
 
-  var colors = ['#FF1461', '#18FF92', '#5A87FF', '#FBF38C'];
+
+  randColor.newPalette();
+  // var colors = ['#FF1461', '#18FF92', '#5A87FF', '#FBF38C'];
 
 function createCircle(x, y){
   var cir = document.createElementNS(svgns, 'circle');
@@ -24,7 +27,7 @@ function createCircle(x, y){
         cir.y = y;
         // cir.setAttribute('r', anime.random(16, 32));
         cir.setAttribute('r', anime.random(6.7, 19));
-        cir.setAttribute('fill', colors[anime.random(0, colors.length - 1)]);
+        cir.setAttribute('fill', randColor.palette[anime.random(0, 4)]);
   s.appendChild(cir);
   return cir;
 }
