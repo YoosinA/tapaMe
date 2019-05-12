@@ -18,7 +18,7 @@ var chars = new Array(26);
 /////////////// functions ////////////////////////
 
 function onKeyPress(e) {
-  var key = e.which - 'a'.charCodeAt();
+  var key = e.which - 'A'.charCodeAt();
   var c = ctrls[key];
   if ( c != 0) {
       c.ani(c.col);

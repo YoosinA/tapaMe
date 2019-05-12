@@ -38,26 +38,29 @@ function radical(target, x, y){
     });
   }
 
-  function lineDrawing(path, color) {
+
+  function tracePath(path, color, rotate) {
     var a = anime({
   targets: path,
   strokeDashoffset: [anime.setDashoffset, 0],
-  easing: 'easeInOutCubic',
+  easing: 'easeOutBack',
+  rotate: rotate,
+ // easing: 'easeOutElastic',
   duration: 1500,
   begin: function(anim) {
     anim.animatables[0].target.setAttribute("stroke", color);
   },
+//rotate: 180,
   complete: function(anim) {
-    // setTimeout(function() {
-    //   anim.animatables[0].target.setAttribute("stroke", "");
-    // }, 500);
-    anim.animatables[0].target.setAttribute("stroke", "");
+    setTimeout(function() {
+      anim.animatables[0].target.setAttribute("stroke", "");
+    }, 500);
   }
 });
 return a;
 }
 
-  export {radical, lineDrawing};
+  export {radical, tracePath};
 
 
 
@@ -266,4 +269,36 @@ return a;
 //       });
 //     });
 //   }
+// });
+
+
+// anime({
+//   targets: 'path',
+//   strokeDashoffset: function(el) {
+//     var pathLength = el.getTotalLength();
+//     el.setAttribute('stroke-dasharray', pathLength);
+//     return [-pathLength, 0];
+//   },
+//   stroke: {
+//     value: function(el, i) {
+//       return 'rgb(200,'+ i * 8 +',150)';
+//     },
+//     easing: 'linear',
+//     duration: 2000,
+//   },
+//   strokeWidth: {
+//     value: 6,
+//     easing: 'linear',
+//     delay: function(el, i) {
+//       return 1200 + (i * 40);
+//     },
+//     duration: 800,
+//   },
+//   delay: function(el, i) {
+//     return i * 60;
+//   },
+//   duration: 1200,
+//   easing: 'easeOutExpo',
+//   loop: true,
+//   direction: 'alternate'
 // });

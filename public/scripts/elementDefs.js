@@ -78,6 +78,7 @@ function drawCircle(color){
   if (!cir){
       cir = document.createElementNS(svgns, 'path');
       cir.setAttribute("stroke-width", cirWidth);
+      cir.setAttribute("transform-origin", "center");
       cir.id = 'drawCircle';
       s.appendChild(cir);
   }
@@ -91,10 +92,11 @@ function drawCircle(color){
   s.removeChild(cir);
   s.appendChild(cir);
   if (a == 0){
-      a = anis.lineDrawing(cir, color);
+      a = anis.tracePath(cir, color, -135);
   } else {
     a.restart();
   }
+  
 
 }
 

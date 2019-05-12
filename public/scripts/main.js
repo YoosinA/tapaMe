@@ -30,7 +30,7 @@ function onDocumentDrop_noDrop(event) {
 
 
 ///////////// Init ///////////////////////////
-document.addEventListener("keypress", ctrl.onKeyPress, false);
+document.addEventListener("keydown", ctrl.onKeyPress, false);
 document.getElementById('toggleSidebar').addEventListener('click', toggleSidebar, false);
 s.addEventListener('click', hideSidebar, false);
 document.addEventListener('dragover', onDocumentDrag_noDrop, false);
