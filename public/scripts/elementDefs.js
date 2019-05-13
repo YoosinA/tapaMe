@@ -2,7 +2,6 @@
 
 import * as anis from './animations.js'
 import anime from "../lib/anime.es.js";
-import * as randColor from "./randcolor.js"
 // import element from './element.js'
 
 var s = document.getElementById('svgSpace');
@@ -16,10 +15,9 @@ function updateCoords() {
 }
 
 
-  randColor.newPalette();
   // var colors = ['#FF1461', '#18FF92', '#5A87FF', '#FBF38C'];
 
-function createCircle(x, y){
+function createCircle(x, y, color){
   var cir = document.createElementNS(svgns, 'circle');
   cir.setAttribute('cx', x+'%');
         cir.setAttribute('cy', y+'%');
@@ -27,7 +25,7 @@ function createCircle(x, y){
         cir.y = y;
         // cir.setAttribute('r', anime.random(16, 32));
         cir.setAttribute('r', anime.random(6.7, 19));
-        cir.setAttribute('fill', randColor.palette[anime.random(0, 4)]);
+        cir.setAttribute('fill', color[anime.random(0, 4)]);
   s.appendChild(cir);
   return cir;
 }
@@ -59,7 +57,7 @@ function animateParticules(color, img) {
        // <use clip-path="url(#myClip)" xlink:href="#heart" fill="red" />
   for (var i = 0; i < numberOfParticules; i++) {
     if (img == 0){
-        var p = createCircle(coords.x, coords.y);
+        var p = createCircle(coords.x, coords.y, color);
     } else {
       var x = coords.x / 100 * playground.offsetWidth /2.5;
       var y = coords.y / 100 * playground.offsetHeight /3;
@@ -72,11 +70,10 @@ function animateParticules(color, img) {
 
 function drawCircle(color, img){
   //color = 'black';
+  color = color[0];
   const cirWidth = 50;
   var cir = document.getElementById('drawCircle');
 
-
-  console.log(cir);
   if (!cir){
       cir = document.createElementNS(svgns, 'path');
       cir.setAttribute("stroke-width", cirWidth);

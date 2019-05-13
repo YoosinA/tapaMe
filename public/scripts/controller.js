@@ -4,6 +4,7 @@
 
 import * as ctrlView from "./controllerView.js"
 import * as eles from "./elementDefs.js"
+import * as randColor from "./randcolor.js"
 
 
 // var animations = new Array(26);
@@ -13,6 +14,7 @@ import * as eles from "./elementDefs.js"
 var ctrls = new Array(26);
 ctrls.fill(0);
 var chars = new Array(26);
+
 
 
 /////////////// functions ////////////////////////
@@ -106,12 +108,14 @@ function onDocumentDrop(event, target, ctrl) {
 
 
 function Ctrl(k, ctrl) {
+  //reorder this to alphabetical order
   this.key = k,
   this.ctrl = ctrl.ctrl,
   this.img = 0,
   this.ani = 0,
   this.col = 'black',
   this.eles = 0,
+  this.anitype = 0,
   this.init = function(ani, filechoose, color){
 
     this.ctrl.addEventListener('drop', (e) => {
@@ -120,9 +124,11 @@ function Ctrl(k, ctrl) {
     this.ctrl.addEventListener('dragover',  onDocumentDrag, false);
 
     ani.addEventListener('change', (e) => {
+      this.anitype = e.target.value,
       this.ani = eles.createEle(e.target.value);
     }, false);
     this.ani = eles.createEle(ani.value);
+    this.anitype = ani.value;
 
     filechoose.addEventListener('change', (e) => {
       onDocumentDrop(e, e.target, this);
@@ -162,6 +168,12 @@ function onColorChange(){
   //store
   // update current animation
 }
+
+function onRandColor(){
+  randColor.newPalette(ctrls);
+}
+
+document.getElementById('randColor').addEventListener('click', onRandColor, false);
 
 
 export { onKeyPress, addNewCtrl,  initChars };

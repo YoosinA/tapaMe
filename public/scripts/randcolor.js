@@ -1,3 +1,5 @@
+import anime from "../lib/anime.es.js";
+import * as eles from "./elementDefs.js"
 
 var url = "http://colormind.io/api/";
 var palette = [];
@@ -6,7 +8,7 @@ var data = {
 	// input : [[44,43,44],[90,83,82],"N","N","N"]
 }
 
-function newPalette(input){
+function newPalette(ctrls, input){
   var http = new XMLHttpRequest();
 
   http.onreadystatechange = function() {
@@ -19,6 +21,20 @@ function newPalette(input){
                 + e[1] + ","
                 + e[2] + ")");
               });
+      // should move this part to controller.js, using async
+      ctrls.forEach(function (e){
+        if (e){
+
+          console.log(e.col)
+          if (e.anitype == "firework" ){
+            e.col = palette;
+          } else {
+            e.col = [palette[anime.random(0, 4)]];
+          }
+          e.eles = 0;
+        }
+
+      });
       // palette = "rgb(" +  rgbvalue.R + ","
       //         + rgbvalue.G + ","
       //         + rgbvalue.B + ")"
