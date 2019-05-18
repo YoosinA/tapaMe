@@ -28,6 +28,19 @@ function onDocumentDrop_noDrop(event) {
   return false;
 }
 
+function postCtrls(){
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", 'http://localhost:3000/saveShare', true);
+
+  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.onreadystatechange = function () {
+    if(xhr.readyState === 4 && xhr.status === 200) {
+      console.log(xhr.responseText);
+    }
+  };
+  xhr.send(JSON.stringify(ctrl.ctrls));
+
+}
 
 ///////////// Init ///////////////////////////
 document.addEventListener("keydown", ctrl.onKeyPress, false);
@@ -36,10 +49,10 @@ s.addEventListener('click', hideSidebar, false);
 document.addEventListener('dragover', onDocumentDrag_noDrop, false);
 document.addEventListener('drop', onDocumentDrop_noDrop, false);
 
-
 /////////////// ctrl init /////////////////
 ctrl.initChars();
 document.getElementById('addNewCtrl').addEventListener('click', ctrl.addNewCtrl, false);
+document.getElementById('saveShare').addEventListener('click', postCtrls, false);
 
 // sidebar.addEventListener('dragleave', onDocumentDrag, false);
 

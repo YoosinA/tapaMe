@@ -16,7 +16,6 @@ ctrls.fill(0);
 var chars = new Array(26);
 
 
-
 /////////////// functions ////////////////////////
 
 function onKeyPress(e) {
