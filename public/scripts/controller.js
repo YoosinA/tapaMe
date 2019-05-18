@@ -175,4 +175,4 @@ function onRandColor(){
 document.getElementById('randColor').addEventListener('click', onRandColor, false);
 
 
-export { onKeyPress, addNewCtrl,  initChars };
+export { onKeyPress, addNewCtrl,  initChars, ctrls };

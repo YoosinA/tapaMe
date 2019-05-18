@@ -36,10 +36,12 @@ function postCtrls(){
 
   xhr.onreadystatechange = function () {
     if(xhr.readyState === 4 && xhr.status === 200) {
-      console.log(xhr.responseText);
+      console.log(window.location.href + '?id=' +xhr.responseText);
     }
   };
-  xhr.send({ "name":"John", "age":30, "car":null });
+  var s= JSON.stringify(ctrl.ctrls);
+  console.log(s)
+  xhr.send(s);
   //{"obj": JSON.stringify(ctrl.ctrls)}
 
 }

@@ -52,13 +52,13 @@ app.post("/saveShare", (req, res) => {
    //res.send("here");
 
    var obj = req.body;
-   var thing = new Thing(obj);
+   var thing = new Thing({"ctrl": obj});
    thing.save(function(err, savedobj){
      if (err){
        console.log("err");
      } else {
        console.log("obj saved");
-       res.send(savedobj._id);
+       res.send(savedobj._id.toString());
      }
    });
 
