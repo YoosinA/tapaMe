@@ -33,12 +33,14 @@ function postCtrls(){
   xhr.open("POST", 'http://localhost:3000/saveShare', true);
 
   xhr.setRequestHeader('Content-Type', 'application/json');
+
   xhr.onreadystatechange = function () {
     if(xhr.readyState === 4 && xhr.status === 200) {
       console.log(xhr.responseText);
     }
   };
-  xhr.send(JSON.stringify(ctrl.ctrls));
+  xhr.send({ "name":"John", "age":30, "car":null });
+  //{"obj": JSON.stringify(ctrl.ctrls)}
 
 }
 

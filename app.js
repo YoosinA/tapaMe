@@ -4,15 +4,15 @@ var bodyPaser = require("body-parser");
 var path = require("path");
 var anime = require("animejs");
 var mongoose = require("mongoose");
-var bodyParser = require("body-parser");
 
 mongoose.connect("mongodb://localhost/test", { useNewUrlParser: true });
 app.use(bodyPaser.urlencoded({extended: true}));
-// var catSchema = new mongoose.Schema({
-//   name: String,
-//   ctrl: Number
+app.use(bodyPaser.json());
+
+// var objSchema = new mongoose.Schema({
+//   name: String
 // })
-//
+
 // var Cat = mongoose.model("Cat", catSchema);
 //
 // var c = new Cat({
@@ -35,8 +35,6 @@ app.use(bodyPaser.urlencoded({extended: true}));
 // })
 // var myJSON = JSON.stringify(obj);
 
-app.use(bodyPaser.urlencoded({extended: true}));
-//app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, 'public')))
 
 
@@ -46,9 +44,24 @@ app.get("/", (req, res)=>{
   res.sendFile(__dirname + '/myindex.html')
 });
 
+var thingSchema = new mongoose.Schema({}, { strict: false });
+var Thing = mongoose.model('Thing', thingSchema);
+
 app.post("/saveShare", (req, res) => {
-  console.log(req.body);
-  // res.send("here");
+//console.log(req)
+   //res.send("here");
+
+   var obj = req.body;
+   var thing = new Thing(obj);
+   thing.save(function(err, savedobj){
+     if (err){
+       console.log("err");
+     } else {
+       console.log("obj saved");
+       res.send(savedobj._id);
+     }
+   });
+
   // res.redirect("/saveShare");
 });
 
