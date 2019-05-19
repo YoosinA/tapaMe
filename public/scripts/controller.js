@@ -16,13 +16,12 @@ ctrls.fill(0);
 var chars = new Array(26);
 
 
-
 /////////////// functions ////////////////////////
 
 function onKeyPress(e) {
   var key = e.which - 'A'.charCodeAt();
   var c = ctrls[key];
-  if ( c != 0 ) {
+  if (c) {
     if (!c.eles){
       c.eles = c.ani(c.col, c.img);
     }
@@ -35,9 +34,27 @@ function onKeyPress(e) {
   }
 }
 
-function initChars(){
+function initSavedCtrls(){
+  ctrls.forEach(function(e) {
+    if(e){
+      //add new ctrl view, then update view.value
+      var ctrl = ctrlView.addNewCtrlView(String.fromCharCode(65+ e.key), e.anitype);
+      var newCtrl = new Ctrl(e.key, ctrl);
+      newCtrl.col = e.col;
+      newCtrl.init(ctrl.ani, ctrl.filechoose, ctrl.color);
+      ctrls[e.key] = newCtrl;
+      chars.pop();
+    }
+  })
+}
+
+function initCtrl(){
   for ( var i= 0 ; i < 26; i ++){
     chars[i] = 25 - i;
+  }
+  if (sCtrls) {
+    ctrls = sCtrls[0].ctrl;
+    initSavedCtrls();
   }
 }
 
@@ -176,4 +193,4 @@ function onRandColor(){
 document.getElementById('randColor').addEventListener('click', onRandColor, false);
 
 
-export { onKeyPress, addNewCtrl,  initChars };
+export { onKeyPress, addNewCtrl,  initCtrl, ctrls };

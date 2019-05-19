@@ -9,8 +9,8 @@ var svgns = "http://www.w3.org/2000/svg";
 
 function updateCoords() {
   return {
-    x : anime.random(20, 80),
-    y: anime.random(10, 90)
+    x : anime.random(13, 80),
+    y: anime.random(10, 75)
   }
 }
 
