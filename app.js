@@ -4,6 +4,7 @@ var bodyPaser = require("body-parser");
 var path = require("path");
 var anime = require("animejs");
 var mongoose = require("mongoose");
+app.set('view engine', 'ejs');
 
 mongoose.connect("mongodb://localhost/test", { useNewUrlParser: true });
 app.use(bodyPaser.urlencoded({extended: true}));
@@ -35,17 +36,31 @@ app.use(bodyPaser.json());
 // })
 // var myJSON = JSON.stringify(obj);
 
+var thingSchema = new mongoose.Schema({}, { strict: false });
+var Thing = mongoose.model('Thing', thingSchema);
+
 app.use(express.static(path.join(__dirname, 'public')))
 
 
 app.get("/", (req, res)=>{
 
   //res.render("newindex");
-  res.sendFile(__dirname + '/myindex.html')
+  var savedCtrls = 0;
+  if (req.query.id) {
+    var ctrl = Thing.find({"_id":  req.query.id },
+    function(err, thing){
+      if (err || !thing){
+        console.log(err);
+      } else {
+        savedCtrls = JSON.stringify(thing);
+      }
+        res.render(__dirname + '/myindex.ejs', {savedCtrls: savedCtrls});
+    });
+  } else {
+    res.render(__dirname + '/myindex.ejs', {savedCtrls: savedCtrls});
+  }
 });
 
-var thingSchema = new mongoose.Schema({}, { strict: false });
-var Thing = mongoose.model('Thing', thingSchema);
 
 app.post("/saveShare", (req, res) => {
 //console.log(req)

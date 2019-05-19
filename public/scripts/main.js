@@ -36,7 +36,7 @@ function postCtrls(){
 
   xhr.onreadystatechange = function () {
     if(xhr.readyState === 4 && xhr.status === 200) {
-      console.log(window.location.href + '?id=' +xhr.responseText);
+      console.log('http://localhost:3000/?id=' +xhr.responseText);
     }
   };
   var s= JSON.stringify(ctrl.ctrls);
@@ -54,7 +54,7 @@ document.addEventListener('dragover', onDocumentDrag_noDrop, false);
 document.addEventListener('drop', onDocumentDrop_noDrop, false);
 
 /////////////// ctrl init /////////////////
-ctrl.initChars();
+ctrl.initCtrl();
 document.getElementById('addNewCtrl').addEventListener('click', ctrl.addNewCtrl, false);
 document.getElementById('saveShare').addEventListener('click', postCtrls, false);
 

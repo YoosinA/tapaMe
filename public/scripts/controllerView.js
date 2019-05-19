@@ -3,7 +3,7 @@
 var s = document.getElementById('sidebar');
 const aniNames = ["firework", "circle"];
 
-function adddropdown(parent){
+function adddropdown(parent, savedAni){
   aniNames.forEach(function(a) {
     var o = document.createElement('option');
     o.value = a;
@@ -11,11 +11,15 @@ function adddropdown(parent){
     parent.appendChild(o);
 })
 // giving the select a random default value
-parent.value = aniNames[Math.floor(Math.random()*aniNames.length)];
+if (savedAni){
+  parent.value = savedAni;
+} else {
+  parent.value = aniNames[Math.floor(Math.random()*aniNames.length)];
+}
 }
 
 
-function addNewCtrlView(k, anis){
+function addNewCtrlView(k, savedAni){
   var ctrl = document.createElement('form');
   ctrl.action = "";
   ctrl.classList.add('ctrl');
@@ -23,7 +27,7 @@ function addNewCtrlView(k, anis){
   key.innerHTML =  k + ':  ';
   ctrl.appendChild(key);
   var ani = document.createElement('select');
-  adddropdown(ani);
+  adddropdown(ani, savedAni);
   ctrl.appendChild(ani);
    var filechoose = document.createElement('input');
    filechoose.type = 'file';
@@ -32,6 +36,7 @@ function addNewCtrlView(k, anis){
   s.appendChild(ctrl);
      var color = document.createElement('input');
         color.type = 'color';
+        // color.val = savedCol;
            ctrl.appendChild(color);
              s.appendChild(ctrl);
   return {ctrl, ani, filechoose, color};
