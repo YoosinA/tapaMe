@@ -32,6 +32,7 @@ function addNewCtrlView(k, savedAni){
    var filechoose = document.createElement('input');
    filechoose.type = 'file';
    filechoose.name = 'Choose Image';
+   filechoose.classList.add("form-control-file");
    ctrl.appendChild(filechoose);
   s.appendChild(ctrl);
      var color = document.createElement('input');
