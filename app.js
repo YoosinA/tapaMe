@@ -90,7 +90,11 @@ app.post("/saveShare", (req, res) => {
 //   var passedVariable = req.query.valid;
 //   // Do something with variable
 // });
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 3000;
+}
 
-app.listen(3000,  ()=> {
+app.listen(port,  ()=> {
   console.log("server started!");
 });
