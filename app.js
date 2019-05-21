@@ -6,7 +6,7 @@ var anime = require("animejs");
 var mongoose = require("mongoose");
 app.set('view engine', 'ejs');
 
-mongoose.connect("mongodb://localhost/test", { useNewUrlParser: true });
+mongoose.connect("mongodb://heroku_p9dd835l:qahtrv3pal5ms54p2oj3q6pdve@ds259596.mlab.com:59596/heroku_p9dd835l", { useNewUrlParser: true });
 app.use(bodyPaser.urlencoded({extended: true}));
 app.use(bodyPaser.json());
 
