@@ -10,32 +10,6 @@ mongoose.connect("mongodb://heroku_p9dd835l:qahtrv3pal5ms54p2oj3q6pdve@ds259596.
 app.use(bodyPaser.urlencoded({extended: true}));
 app.use(bodyPaser.json());
 
-// var objSchema = new mongoose.Schema({
-//   name: String
-// })
-
-// var Cat = mongoose.model("Cat", catSchema);
-//
-// var c = new Cat({
-//   name: "mewmew",
-//   ctrl: 3
-// }, function(err, cat){
-//   if (err){
-//     console.log("err");
-//   } else {
-//     console.log("it works");
-//     console.log(cat);
-//   })
-//
-// Cat.find({}, function(err, cats){
-//   if (err){
-//     console.log(err);
-//   }else {
-//     console.log(cats);
-//   }
-// })
-// var myJSON = JSON.stringify(obj);
-
 var thingSchema = new mongoose.Schema({}, { strict: false });
 var Thing = mongoose.model('Thing', thingSchema);
 
