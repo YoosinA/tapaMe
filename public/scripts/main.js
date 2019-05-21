@@ -56,12 +56,12 @@ function postCtrls(){
 
   xhr.onreadystatechange = function () {
     if(xhr.readyState === 4 && xhr.status === 200) {
-      document.getElementById("savedLink").value = 'http://localhost:3000/?id=' +xhr.responseText;
-      sharinglink = 'http://localhost:3000/?id=' +xhr.responseText;
+      document.getElementById("savedLink").value = window.location.href +xhr.responseText;
+      sharinglink = window.location.href +xhr.responseText;
     }
   };
   var s= JSON.stringify(ctrl.ctrls);
-  console.log(s)
+  // console.log(s)
   xhr.send(s);
   //{"obj": JSON.stringify(ctrl.ctrls)}
 

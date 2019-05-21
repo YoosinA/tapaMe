@@ -1,7 +1,7 @@
 import anime from "../lib/anime.es.js";
 import * as eles from "./elementDefs.js"
 
-var url = "http://colormind.io/api/";
+var url = "https://colormind.io/api/";
 var palette = [];
 var data = {
 	model : "default"
