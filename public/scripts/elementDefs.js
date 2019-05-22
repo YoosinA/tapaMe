@@ -84,8 +84,6 @@ function drawCircle(color, img){
   // center circle
   var cirx = playground.offsetWidth/2;
   var ciry = playground.offsetHeight/2;
-  console.log(s);
-  console.log(ciry);
   cir.setAttribute('d', 'M '+ cirx + ',' + ciry +
   ' m -175, 0 a 175,175 0 1,0 350,0  a 175,175 0 1,0 -350,0');
   s.removeChild(cir);

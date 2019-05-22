@@ -50,18 +50,18 @@ function shareSNS(link, name){
 
 function postCtrls(){
   var xhr = new XMLHttpRequest();
-  xhr.open("POST", 'http://localhost:3000/saveShare', true);
+  xhr.open("POST", window.location.href + 'saveShare', true);
 
   xhr.setRequestHeader('Content-Type', 'application/json');
 
   xhr.onreadystatechange = function () {
     if(xhr.readyState === 4 && xhr.status === 200) {
-      document.getElementById("savedLink").value = 'http://localhost:3000/?id=' +xhr.responseText;
-      sharinglink = 'http://localhost:3000/?id=' +xhr.responseText;
+      document.getElementById("savedLink").value = window.location.href + '?id='+xhr.responseText;
+      sharinglink = window.location.href + '?id='+xhr.responseText;
     }
   };
   var s= JSON.stringify(ctrl.ctrls);
-  console.log(s)
+  // console.log(s)
   xhr.send(s);
   //{"obj": JSON.stringify(ctrl.ctrls)}
 
