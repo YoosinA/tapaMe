@@ -2,10 +2,22 @@
   <html lang="en" dir="ltr">
     <head>
       <meta charset="utf-8">
-      <title>Color Tap</title>
+      <title>ColorTap</title>
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="./styles/main.css">
     </head>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-140677515-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-140677515-1');
+</script>
+
+
   <body>
     <div id="playground">
             <svg id="svgSpace" overflow="hidden" >
@@ -29,15 +41,14 @@
             <h3>Configure animation</h3>
         </div>
 
-            <button type="button"  class="btn btn-dark" id="addNewCtrl">+</button>
-            <button type="button"  class="btn btn-dark" id="randColor">x</button>
-            <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModalCenter" id="saveShare">s</button>
+            <button type="button"  class="btn btn-dark" id="addNewCtrl">Add New Animation</button>
+            <button type="button"  class="btn btn-dark" id="randColor">Randomize Color</button>
+            <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModalCenter" id="saveShare">Save & Share</button>
         <div class="bottom-nav">
           About
         </div>
 
     </nav>
-
 
     <!-- Modal -->
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
