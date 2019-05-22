@@ -56,8 +56,8 @@ function postCtrls(){
 
   xhr.onreadystatechange = function () {
     if(xhr.readyState === 4 && xhr.status === 200) {
-      document.getElementById("savedLink").value = window.location.href +xhr.responseText;
-      sharinglink = window.location.href +xhr.responseText;
+      document.getElementById("savedLink").value = window.location.href + '/?id='+xhr.responseText;
+      sharinglink = window.location.href + '/?id='+xhr.responseText;
     }
   };
   var s= JSON.stringify(ctrl.ctrls);
