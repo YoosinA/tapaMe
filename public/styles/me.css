@@ -1,0 +1,27 @@
+.container{
+    padding:5%;
+}
+body{
+  background: #ded7c9;
+}
+
+.container .img{
+    text-align:right;
+}
+.container .details{
+    border-left:3px solid #9e9e9e;
+}
+.container .details p{
+    font-size:15px;
+    font-weight:bold;
+}
+
+.fa{
+  padding-left: 3%;
+  padding-right: 5%;
+}
+
+.links{
+  padding-top: 10%;
+  font-size:13px;
+}

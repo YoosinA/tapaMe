@@ -37,6 +37,10 @@ app.get("/", (req, res)=>{
   }
 });
 
+app.get("/me.html", (req, res)=>{
+  res.sendFile(__dirname + '/me.html')
+});
+
 
 app.post("/saveShare", (req, res) => {
 //console.log(req)
