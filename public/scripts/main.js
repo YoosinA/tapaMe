@@ -50,7 +50,7 @@ function shareSNS(link, name){
 
 function postCtrls(){
   var xhr = new XMLHttpRequest();
-  xhr.open("POST", 'http://localhost:3000/saveShare', true);
+  xhr.open("POST", window.location.href + 'saveShare', true);
 
   xhr.setRequestHeader('Content-Type', 'application/json');
 

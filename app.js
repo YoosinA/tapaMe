@@ -4,6 +4,8 @@ var bodyPaser = require("body-parser");
 var path = require("path");
 var anime = require("animejs");
 var mongoose = require("mongoose");
+const request = require('request');
+
 app.set('view engine', 'ejs');
 
 mongoose.connect("mongodb://heroku_p9dd835l:qahtrv3pal5ms54p2oj3q6pdve@ds259596.mlab.com:59596/heroku_p9dd835l", { useNewUrlParser: true });
@@ -39,7 +41,6 @@ app.get("/", (req, res)=>{
 app.post("/saveShare", (req, res) => {
 //console.log(req)
    //res.send("here");
-
    var obj = req.body;
    var thing = new Thing({"ctrl": obj});
    thing.save(function(err, savedobj){
@@ -50,20 +51,28 @@ app.post("/saveShare", (req, res) => {
        res.send(savedobj._id.toString());
      }
    });
-
-  // res.redirect("/saveShare");
 });
 
-// app.get('/category', function(req, res) {
-//   var string = encodeURIComponent('something that would break');
-//   res.redirect('/?valid=' + string);
-// });
-// You can snag that in your other route by getting the parameters sent by using req.query.
-//
-// app.get('/', function(req, res) {
-//   var passedVariable = req.query.valid;
-//   // Do something with variable
-// });
+app.get("/palette", (req, res) => {
+  var url = "http://colormind.io/api/";
+  var data = JSON.stringify({
+    model : "default"
+    // input : [[44,43,44],[90,83,82],"N","N","N"]
+  })
+
+request.post({
+    url: url,
+    body: data
+}, function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+        res.send(body);
+    }
+});
+
+});
+
+
+
 let port = process.env.PORT;
 if (port == null || port == "") {
   port = 3000;

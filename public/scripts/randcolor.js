@@ -1,20 +1,18 @@
 import anime from "../lib/anime.es.js";
 import * as eles from "./elementDefs.js"
 
-var url = "https://colormind.io/api/";
 var palette = [];
-var data = {
-	model : "default"
-	// input : [[44,43,44],[90,83,82],"N","N","N"]
-}
 
 function newPalette(ctrls, input){
-  var http = new XMLHttpRequest();
+	var xhr = new XMLHttpRequest();
+  xhr.open("GET", window.location.href + 'palette', true);
 
-  http.onreadystatechange = function() {
-  	if(http.readyState == 4 && http.status == 200) {
-      var result =  JSON.parse(http.responseText).result;
-      console.log(result);
+  xhr.setRequestHeader('Content-Type', 'application/json');
+
+  xhr.onreadystatechange = function () {
+    if(xhr.readyState === 4 && xhr.status === 200) {
+			console.log(xhr.responseText);
+			var result =  JSON.parse(xhr.responseText).result;
       palette = [];
       result.forEach(function(e) {
         palette.push("rgb(" +  e[0] + ","
@@ -35,15 +33,10 @@ function newPalette(ctrls, input){
         }
 
       });
-      // palette = "rgb(" +  rgbvalue.R + ","
-      //         + rgbvalue.G + ","
-      //         + rgbvalue.B + ")"
-  	}
-  }
-
-  http.open("POST", url, true);
-  http.send(JSON.stringify(data));
+    }
+  };
+  xhr.send(null);
+  //{"obj": JSON.stringify(ctrl.ctrls)}
 }
-
 
 export {newPalette, palette};
