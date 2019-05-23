@@ -4,7 +4,10 @@
 body{
   background: #ded7c9;
 }
-
+#back{
+  font-size:13px;
+  font-weight:bold;
+}
 .container .img{
     text-align:right;
 }
@@ -22,6 +25,7 @@ body{
 }
 
 .links{
-  padding-top: 10%;
+  padding-top: 7%;
+  padding-bottom: 5%;
   font-size:13px;
 }
